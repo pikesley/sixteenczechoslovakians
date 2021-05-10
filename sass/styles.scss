@@ -5,8 +5,8 @@ $shim: 4em;
 body {
   font-family: $primary;
   margin: $shim;
-  background-color: black;
-  color: white;
+  // background-color: black;
+  // color: white;
 }
 
 h1 {
@@ -17,4 +17,9 @@ h1 {
 footer {
   text-align: center;
 font-size: 1em;
+}
+
+a {
+  colour: blue;
+  text-decoration: none;
 }
