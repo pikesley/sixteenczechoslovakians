@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto");
+$primary: "Roboto";
+$shim: 4em;
+
+body {
+  font-family: $primary;
+  margin: $shim;
+  background-color: black;
+  color: white;
+}
+
+h1 {
+  text-align: center;
+  font-size: 3em;
+}

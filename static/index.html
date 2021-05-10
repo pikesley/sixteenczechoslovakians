@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>Woke Up This Morning</title>
+  </head>
+
+  <body>
+    <header>
+      <h1>Woke Up This Morning, Got Myself A Markov Chain</h1>
+    </header>
+    <main></main>
+  </body>
+
+  <script>
+    let previousCharacter = "";
+    let currentCharacter = "";
+    let characters = [];
+    // let dialogue = [];
+
+    $(document).ready(function () {
+      $.get(
+        "https://sixteenczechoslovakians.herokuapp.com/content/characters",
+        function (characters) {
+          $.get(
+            "https://sixteenczechoslovakians.herokuapp.com/content/lines?count=16",
+            function (data) {
+              data.lines.forEach(function (line) {
+                let entry = $("<p/>");
+
+                currentCharacter = randomCharacter(
+                  characters.characters,
+                  previousCharacter
+                );
+
+                let content = `${currentCharacter.toUpperCase()}: `;
+                content += line;
+
+                entry.text(content);
+
+                $("main").append(entry);
+                previousCharacter = currentCharacter;
+              });
+            }
+          );
+        }
+      );
+    });
+
+    let randomCharacter = function (characters, current) {
+      eligibleCharacters = [];
+      characters
+        .map((x) => x)
+        .forEach(function (character) {
+          if (character != current) {
+            eligibleCharacters.push(character);
+          }
+        });
+
+      return eligibleCharacters[
+        Math.floor(Math.random() * eligibleCharacters.length)
+      ];
+    };
+  </script>
+</html>
